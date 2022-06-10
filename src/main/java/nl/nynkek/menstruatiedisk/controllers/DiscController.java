@@ -19,7 +19,7 @@ public class DiscController {
         this.discService = discService;
     }
 
-    @GetMapping("/hoi")
+    @GetMapping("/disc")
     public ResponseEntity<List<Disc>> getDisc() {
         List<Disc> dtos;
 
@@ -28,19 +28,14 @@ public class DiscController {
         return ResponseEntity.ok().body(dtos);
     }
 
-    @GetMapping("/")
-    public List<Disc> frontpage() {
-        List<Disc> discs = discService.getDiscs();
-        return discs;
-    }
 
-    @GetMapping("/b")
-    public List<Disc> frontpage2() {
+    @GetMapping("/discs")
+    public List<Disc> frontpage() {
         return discService.getDiscs();
     }
 
     @GetMapping("/{id}")
-    public Disc getDisc(@PathVariable int id) {
+    public Disc getDiscById(@PathVariable int id) {
         return discService.getDisc(id);
     }
 

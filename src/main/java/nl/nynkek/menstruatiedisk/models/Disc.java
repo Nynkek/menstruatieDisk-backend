@@ -9,7 +9,7 @@ public class Disc {
     @GeneratedValue
     Long id;
 
-    @Column(nullable = false, length = 255)
+    @Column
     private String name;
     private String brand;
     private String model;
@@ -20,10 +20,11 @@ public class Disc {
     private String designFeature;
     private String shape;
     private String firmness;
-    private boolean isAvailableInNL = false;
     private String linkToStore;
     private String linkToReview;
     private String image;
+    @Column(name="is_available_in_nl")
+    private boolean isAvailableInNL = false;
 
     @Enumerated(EnumType.ORDINAL)
     private Material material;
