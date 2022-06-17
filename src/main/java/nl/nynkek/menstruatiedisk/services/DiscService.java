@@ -22,8 +22,9 @@ public class DiscService {
         return discs;
     }
 
-    public Disc getDisc(int id) {
-        Disc disc = discRepository.getById((long) id);
+    public Disc getDisc(Long id) {
+        Disc disc = discRepository.findById(id).get();
+        System.out.println("HALLO" + disc);
         return disc;
     }
 

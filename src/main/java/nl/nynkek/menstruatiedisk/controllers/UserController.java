@@ -1,5 +1,6 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
+import nl.nynkek.menstruatiedisk.dtos.UserDto;
 import nl.nynkek.menstruatiedisk.models.User;
 import nl.nynkek.menstruatiedisk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable int username) {
+    @GetMapping("/user/{username}")
+    public UserDto getUserByUsername(@PathVariable String username) {
         return userService.getUser(username);
     }
 

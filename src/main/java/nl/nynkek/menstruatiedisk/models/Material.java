@@ -8,5 +8,4 @@ public enum Material {
     SILICONE,
     POLYMER,
     TPE;
-
 }
