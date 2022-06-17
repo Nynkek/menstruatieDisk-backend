@@ -13,7 +13,7 @@ public class User {
     @Column
     private String emailAdress;
     private String password;
-    private String role;
+    private String role = "gebruiker";
 
 //    @OneToMany(mappedBy = "user")
 //    private List<PendingDisc> pendingDiscs;
@@ -42,13 +42,9 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+// keuzes: geen setter voor Role
+
 
 //    public List<PendingDisc> getPendingDiscs() {
 //        return pendingDiscs;

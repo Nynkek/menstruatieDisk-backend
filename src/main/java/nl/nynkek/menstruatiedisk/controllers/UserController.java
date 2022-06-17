@@ -1,14 +1,13 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
 import nl.nynkek.menstruatiedisk.dtos.UserDto;
-import nl.nynkek.menstruatiedisk.models.User;
 import nl.nynkek.menstruatiedisk.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,23 +19,39 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<List<User>> getUser() {
-        List<User> dtos;
-
-        dtos = userService.getUsers();
-
-        return ResponseEntity.ok().body(dtos);
-    }
-
     @GetMapping("/users")
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return userService.getUsers();
     }
 
     @GetMapping("/user/{username}")
     public UserDto getUserByUsername(@PathVariable String username) {
         return userService.getUser(username);
+    }
+
+    @PostMapping(value = "/createUser")
+    public ResponseEntity<Object> createUser(@RequestBody UserDto dto) {
+
+        String newUsername = userService.createUser(dto);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
+                .buildAndExpand(newUsername).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(value = "/{username}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto dto) {
+
+        userService.updateUser(username, dto);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{username}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("username") String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.noContent().build();
     }
 
 }
