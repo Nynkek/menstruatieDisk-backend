@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "pending_discs")
-public class PendingDisc {
+public class PendingDisc extends SuperDisc {
 
     @Id
     @GeneratedValue
