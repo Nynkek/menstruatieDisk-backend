@@ -10,7 +10,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
@@ -19,12 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public List<UserDto> getUsers() {
         return userService.getUsers();
     }
 
-    @GetMapping("/user/{username}")
+    @GetMapping("/{username}")
     public UserDto getUserByUsername(@PathVariable String username) {
         return userService.getUser(username);
     }
