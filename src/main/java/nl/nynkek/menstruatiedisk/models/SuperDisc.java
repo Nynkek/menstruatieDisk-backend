@@ -13,6 +13,7 @@ abstract class SuperDisc {
     private int capacity = 0;
     private int rimWidth = 0;
     private boolean isReusable = true;
+    private boolean hasStem = false;
     private String designFeature;
     private String shape;
     private String firmness;
@@ -24,6 +25,14 @@ abstract class SuperDisc {
 
     @Enumerated(EnumType.ORDINAL)
     private Material material;
+
+    public boolean isHasStem() {
+        return hasStem;
+    }
+
+    public void setHasStem(boolean hasStem) {
+        this.hasStem = hasStem;
+    }
 
     public String getName() {
         return name;
