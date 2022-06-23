@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @MappedSuperclass
 abstract class SuperDisc {
+    @Id
+    @GeneratedValue
+    Long id;
 
     @Column
     private String name;
@@ -25,6 +28,14 @@ abstract class SuperDisc {
 
     @Enumerated(EnumType.ORDINAL)
     private Material material;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public boolean isHasStem() {
         return hasStem;
