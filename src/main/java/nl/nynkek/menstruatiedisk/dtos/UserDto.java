@@ -1,23 +1,19 @@
 package nl.nynkek.menstruatiedisk.dtos;
 
-import nl.nynkek.menstruatiedisk.models.PendingDisc;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.nynkek.menstruatiedisk.models.Authority;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Set;
 
 public class UserDto {
-    @NotBlank
+
     public String username;
-
-    @NotBlank
-    @Email
     public String emailAdress;
+    public String apikey;
 
-    @NotBlank
-    @Size(min=6, max=30)
+    @JsonSerialize
+    public Set<Authority> authorities;
+
     public String password;
 
 //    public List<Long> pendingDiscs;
@@ -46,11 +42,19 @@ public class UserDto {
         this.password = password;
     }
 
-//    public List<Long> getPendingDiscs() {
-//        return pendingDiscs;
-//    }
-//
-//    public void setPendingDiscs(List<Long> pendingDiscs) {
-//        this.pendingDiscs = pendingDiscs;
-//    }
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

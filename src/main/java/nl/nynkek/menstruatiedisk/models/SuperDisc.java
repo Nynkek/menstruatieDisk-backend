@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @MappedSuperclass
 abstract class SuperDisc {
+    @Id
+    @GeneratedValue
+    Long id;
 
     @Column
     private String name;
@@ -20,11 +23,19 @@ abstract class SuperDisc {
     private String linkToStore;
     private String linkToReview;
     private String image;
-    @Column(name="is_available_in_nl")
+    @Column(name = "is_available_in_nl")
     private boolean isAvailableInNL = false;
 
     @Enumerated(EnumType.ORDINAL)
     private Material material;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public boolean isHasStem() {
         return hasStem;
@@ -152,5 +163,8 @@ abstract class SuperDisc {
 
     public void setMaterial(Material material) {
         this.material = material;
+    }
+
+    public void setCreatedDate(String createdDate) {
     }
 }

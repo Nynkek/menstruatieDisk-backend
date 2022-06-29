@@ -1,18 +1,34 @@
 package nl.nynkek.menstruatiedisk.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column
     private String emailAdress;
+
+    @Column(nullable = false, length = 255)
     private String password;
-    private String role = "gebruiker";
+
+    @Column
+    private String apikey;
+
+    @OneToMany(
+            targetEntity = Authority.class,
+            mappedBy = "username",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER)
+    private Set<Authority> authorities = new HashSet<>();
+
 
 //    @OneToMany(mappedBy = "user")
 //    private List<PendingDisc> pendingDiscs;
@@ -41,15 +57,23 @@ public class User {
         this.password = password;
     }
 
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
 
-// keuzes: geen setter voor Role
+    public void addAuthority(Authority authority) {
+        this.authorities.add(authority);
+    }
 
+    public void removeAuthority(Authority authority) {
+        this.authorities.remove(authority);
+    }
 
-//    public List<PendingDisc> getPendingDiscs() {
-//        return pendingDiscs;
-//    }
-//
-//    public void setPendingDiscs(List<PendingDisc> pendingDiscs) {
-//        this.pendingDiscs = pendingDiscs;
-//    }
+    public String getApikey() {
+        return apikey;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
 }
