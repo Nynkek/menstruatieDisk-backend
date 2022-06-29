@@ -23,26 +23,26 @@ public class DiscController {
         this.discService = discService;
     }
 
-//
-//    @GetMapping("/")
-//    public ResponseEntity<List<Disc>> getDisc() {
-//        List<Disc> dtos;
-//
-//        dtos = discService.getDiscs();
-//
-//        return ResponseEntity.ok().body(dtos);
-//    }
-
 
     @GetMapping("/")
-    public List<Disc> frontpage() {
-        List<Disc> discs = discService.getDiscs();
-        return discs;
+    public ResponseEntity<List<Disc>> getDisc() {
+        List<Disc> dtos;
+
+        dtos = discService.getDiscs();
+
+        return ResponseEntity.ok().body(dtos);
     }
 
+
+//    @GetMapping("/")
+//    public List<Disc> frontpage() {
+//        List<Disc> discs = discService.getDiscs();
+//        return discs;
+//    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Disc> getDiscById(@PathVariable("id") Long id) {
-        Disc disc = discService.getDisc(id);
+    public ResponseEntity<DiscDto> getDiscById(@PathVariable("id") Long id) {
+        DiscDto disc = discService.getDisc(id);
         return ResponseEntity.ok().body(disc);
     }
 

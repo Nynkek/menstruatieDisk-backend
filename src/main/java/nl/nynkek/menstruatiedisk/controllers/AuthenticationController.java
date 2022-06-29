@@ -1,6 +1,8 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
-import nl.novi.techiteasy1121.utils.JwtUtil;
+import nl.nynkek.menstruatiedisk.payload.AuthenticationRequest;
+import nl.nynkek.menstruatiedisk.payload.AuthenticationResponse;
+import nl.nynkek.menstruatiedisk.utils.JwtUtil;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +44,7 @@ public class AuthenticationController {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-        }
-        catch (BadCredentialsException ex) {
+        } catch (BadCredentialsException ex) {
             throw new Exception("Incorrect username or password", ex);
         }
 
@@ -54,4 +55,6 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
+
+}
 

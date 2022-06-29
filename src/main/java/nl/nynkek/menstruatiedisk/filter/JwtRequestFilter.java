@@ -1,5 +1,7 @@
 package nl.nynkek.menstruatiedisk.filter;
 
+import nl.nynkek.menstruatiedisk.services.CustomerUserDetailsService;
+import nl.nynkek.menstruatiedisk.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

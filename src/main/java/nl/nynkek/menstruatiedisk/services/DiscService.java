@@ -1,14 +1,14 @@
 package nl.nynkek.menstruatiedisk.services;
 
 import nl.nynkek.menstruatiedisk.dtos.DiscDto;
-import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
+import nl.nynkek.menstruatiedisk.exeptions.RecordNotFoundException;
 import nl.nynkek.menstruatiedisk.models.Disc;
-import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.repositories.DiscRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DiscService {
@@ -25,18 +25,42 @@ public class DiscService {
         return discs;
     }
 
-    public Disc getDisc(Long id) {
-        Disc disc = discRepository.findById(id).get();
-        if (disc == null)
-            throw new
-
-        System.out.println("HALLO" + disc);
-        return disc;
-    }
+//    public Disc getDisc(Long id) {
+//        Disc disc = discRepository.findById(id).get();
+//        if (disc == null)
+//            throw new
+//
+//        System.out.println("HALLO" + disc);
+//        return disc;
+//    }
 
     public Long createDisc(DiscDto discDto) {
         Disc newDisc = discRepository.save(toDisc(discDto));
         return newDisc.getId();
+    }
+
+    public static DiscDto transferToDto(Disc disc) {
+        var dto = new DiscDto();
+
+        dto.id = disc.getId();
+        dto.name = disc.getName();
+        dto.brand = disc.getBrand();
+        dto.model = disc.getModel();
+        dto.width = disc.getWidth();
+        dto.capacity = disc.getCapacity();
+        dto.rimWidth = disc.getRimWidth();
+        dto.isReusable = disc.isReusable();
+        dto.hasStem = disc.isHasStem();
+        dto.designFeature = disc.getDesignFeature();
+        dto.shape = disc.getShape();
+        dto.firmness = disc.getFirmness();
+        dto.linkToStore = disc.getLinkToStore();
+        dto.linkToReview = disc.getLinkToReview();
+        dto.image = disc.getImage();
+        dto.isAvailableInNL = disc.isAvailableInNL();
+        dto.material = disc.getMaterial();
+
+        return dto;
     }
 
     public Disc toDisc(DiscDto discDto) {
@@ -63,7 +87,16 @@ public class DiscService {
 
         return disc;
     }
-    
-    
+
+
+    public DiscDto getDisc(Long id) {
+        Optional<Disc> disc = discRepository.findById(id);
+        if(disc.isPresent()) {
+            DiscDto disc1 = transferToDto(disc.get());
+            return disc1;
+        } else {
+            throw new RecordNotFoundException("No disc found");
+        }
+    }
 }
 

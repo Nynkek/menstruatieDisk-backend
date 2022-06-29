@@ -1,5 +1,6 @@
 package nl.nynkek.menstruatiedisk.services;
 
+import nl.nynkek.menstruatiedisk.dtos.DiscDto;
 import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.repositories.PendingDiscRepository;
@@ -50,9 +51,23 @@ public class PendingDiscService {
 
         var dto = new PendingDiscDto();
 
+        dto.id = pendingDisc.getId();
         dto.name = pendingDisc.getName();
         dto.brand = pendingDisc.getBrand();
         dto.model = pendingDisc.getModel();
+        dto.width = pendingDisc.getWidth();
+        dto.capacity = pendingDisc.getCapacity();
+        dto.rimWidth = pendingDisc.getRimWidth();
+        dto.isReusable = pendingDisc.isReusable();
+        dto.hasStem = pendingDisc.isHasStem();
+        dto.designFeature = pendingDisc.getDesignFeature();
+        dto.shape = pendingDisc.getShape();
+        dto.firmness = pendingDisc.getFirmness();
+        dto.linkToStore = pendingDisc.getLinkToStore();
+        dto.linkToReview = pendingDisc.getLinkToReview();
+        dto.image = pendingDisc.getImage();
+        dto.isAvailableInNL = pendingDisc.isAvailableInNL();
+        dto.material = pendingDisc.getMaterial();
 
         return dto;
     }

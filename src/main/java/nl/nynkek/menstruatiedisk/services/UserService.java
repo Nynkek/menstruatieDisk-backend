@@ -2,9 +2,11 @@ package nl.nynkek.menstruatiedisk.services;
 
 import nl.nynkek.menstruatiedisk.dtos.UserDto;
 import nl.nynkek.menstruatiedisk.exeptions.UsernameNotFoundException;
+import nl.nynkek.menstruatiedisk.models.Authority;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.models.User;
 import nl.nynkek.menstruatiedisk.repositories.UserRepository;
+import nl.nynkek.menstruatiedisk.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,9 @@ import java.util.Set;
 @Service
 public class UserService {
 
-
     @Autowired
     private final UserRepository userRepository;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -35,9 +37,9 @@ public class UserService {
     public UserDto getUser(String username) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             dto = fromUser(user.get());
-        }else {
+        } else {
             throw new UsernameNotFoundException(username);
         }
         return dto;
@@ -49,6 +51,8 @@ public class UserService {
     }
 
     public String createUser(UserDto userDto) {
+        String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        userDto.setApikey(randomString);
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -65,17 +69,44 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public Set<Authority> getAuthorities(String username) {
+        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        User user = userRepository.findById(username).get();
+        UserDto userDto = fromUser(user);
+        return userDto.getAuthorities();
+    }
+
+    public void addAuthority(String username, String authority) {
+
+        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        User user = userRepository.findById(username).get();
+        user.addAuthority(new Authority(username, authority));
+        userRepository.save(user);
+    }
+
+    public void removeAuthority(String username, String authority) {
+        if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+        User user = userRepository.findById(username).get();
+        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
+        user.removeAuthority(authorityToRemove);
+        userRepository.save(user);
+    }
+
+
     // keuze: username is de unique sleutel/id. dus die mag je niet aanpassen. Expres!
 
     // als er nog een pending disc aan gebruiker gekoppeld is mag je de user niet verwijderen.
 
-    public static UserDto fromUser(User user){
+    public static UserDto fromUser(User user) {
 
         var dto = new UserDto();
 
         dto.username = user.getUsername();
         dto.password = user.getPassword();
         dto.emailAdress = user.getEmailAdress();
+        dto.authorities = user.getAuthorities();
+        dto.apikey = user.getApikey();
+
 
 //        dto.pendingDiscs = user.getPendingDiscs().stream().map(pendingDisc -> {
 //            return pendingDisc.getId();
@@ -91,6 +122,7 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEmailAdress(userDto.getEmailAdress());
+        user.setApikey(userDto.getApikey());
 //        user.addRole("ROLE_USER");
 
         return user;
