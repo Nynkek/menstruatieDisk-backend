@@ -59,11 +59,11 @@ VALUES (8, 'Bamboozy', 65, 'Nederlands merk', true, false, 'L', 'Bamboozy disk',
 
 
 INSERT INTO users (username, email_adress, password)
-VALUES ('nynke', 'info@email.nl', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica');
+VALUES ('nynke', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 INSERT INTO users (username, email_adress, password)
-VALUES ('User', 'info@email.nl', 'geheim1');
+VALUES ('User', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 INSERT INTO users (username, email_adress, password)
-VALUES ('admin', 'info@email.nl', 'geheim2');
+VALUES ('admin', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 
 
 INSERT INTO brands (id, name, website, description)
