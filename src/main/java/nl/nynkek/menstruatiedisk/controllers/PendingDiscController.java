@@ -30,7 +30,7 @@ public class PendingDiscController {
     }
 
     @GetMapping("/{id}")
-    public PendingDisc getBrandById(@PathVariable("id") Long id) {
+    public PendingDisc getPendingDiscsById(@PathVariable("id") Long id) {
         PendingDisc pendingDisc = pendingDiscService.getPendingDisc(id);
         return pendingDisc;
     }

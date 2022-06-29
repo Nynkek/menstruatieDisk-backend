@@ -1,33 +1,28 @@
-package nl.nynkek.menstruatiedisk.models;
+package nl.nynkek.menstruatiedisk.dtos;
 
-import javax.persistence.*;
+import nl.nynkek.menstruatiedisk.models.Material;
+import nl.nynkek.menstruatiedisk.models.User;
 
-@MappedSuperclass
-abstract class SuperDisc {
-    @Id
-    @GeneratedValue
-    Long id;
-
-    @Column
-    private String name;
-    private String brand;
-    private String model;
-    private int width = 0;
-    private int capacity = 0;
-    private int rimWidth = 0;
-    private boolean isReusable = true;
-    private boolean hasStem = false;
-    private String designFeature;
-    private String shape;
-    private String firmness;
-    private String linkToStore;
-    private String linkToReview;
-    private String image;
-    @Column(name = "is_available_in_nl")
-    private boolean isAvailableInNL = false;
-
-    @Enumerated(EnumType.ORDINAL)
-    private Material material;
+public class DiscDto {
+    public Long id;
+    public String createdDate;
+    public User user;
+    public String name;
+    public String brand;
+    public String model;
+    public int width = 0;
+    public int capacity = 0;
+    public int rimWidth = 0;
+    public boolean isReusable = true;
+    public boolean hasStem = false;
+    public String designFeature;
+    public String shape;
+    public String firmness;
+    public String linkToStore;
+    public String linkToReview;
+    public String image;
+    public boolean isAvailableInNL = false;
+    public Material material;
 
     public Long getId() {
         return id;
@@ -37,12 +32,20 @@ abstract class SuperDisc {
         this.id = id;
     }
 
-    public boolean isHasStem() {
-        return hasStem;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setHasStem(boolean hasStem) {
-        this.hasStem = hasStem;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {
@@ -99,6 +102,14 @@ abstract class SuperDisc {
 
     public void setReusable(boolean reusable) {
         isReusable = reusable;
+    }
+
+    public boolean isHasStem() {
+        return hasStem;
+    }
+
+    public void setHasStem(boolean hasStem) {
+        this.hasStem = hasStem;
     }
 
     public String getDesignFeature() {
@@ -163,8 +174,5 @@ abstract class SuperDisc {
 
     public void setMaterial(Material material) {
         this.material = material;
-    }
-
-    public void setCreatedDate(String createdDate) {
     }
 }

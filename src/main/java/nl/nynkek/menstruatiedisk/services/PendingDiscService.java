@@ -1,10 +1,7 @@
 package nl.nynkek.menstruatiedisk.services;
 
 import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
-import nl.nynkek.menstruatiedisk.dtos.UserDto;
-import nl.nynkek.menstruatiedisk.exeptions.IdNotFoundException;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
-import nl.nynkek.menstruatiedisk.models.User;
 import nl.nynkek.menstruatiedisk.repositories.PendingDiscRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
