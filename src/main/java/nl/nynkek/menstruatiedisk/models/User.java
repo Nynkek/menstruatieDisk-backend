@@ -18,9 +18,6 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Column
-    private String apikey;
-
     @OneToMany(
             targetEntity = Authority.class,
             mappedBy = "username",
@@ -30,8 +27,6 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
-//    @OneToMany(mappedBy = "user")
-//    private List<PendingDisc> pendingDiscs;
 
     public String getUsername() {
         return username;
@@ -69,11 +64,4 @@ public class User {
         this.authorities.remove(authority);
     }
 
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
 }

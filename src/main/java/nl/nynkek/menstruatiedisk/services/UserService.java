@@ -52,7 +52,6 @@ public class UserService {
 
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
-        userDto.setApikey(randomString);
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -105,7 +104,7 @@ public class UserService {
         dto.password = user.getPassword();
         dto.emailAdress = user.getEmailAdress();
         dto.authorities = user.getAuthorities();
-        dto.apikey = user.getApikey();
+
 
 
 //        dto.pendingDiscs = user.getPendingDiscs().stream().map(pendingDisc -> {
@@ -122,7 +121,7 @@ public class UserService {
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEmailAdress(userDto.getEmailAdress());
-        user.setApikey(userDto.getApikey());
+
 //        user.addRole("ROLE_USER");
 
         return user;

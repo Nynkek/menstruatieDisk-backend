@@ -68,6 +68,7 @@ public class PendingDiscService {
         dto.image = pendingDisc.getImage();
         dto.isAvailableInNL = pendingDisc.isAvailableInNL();
         dto.material = pendingDisc.getMaterial();
+        dto.addedBy = pendingDisc.getAddedBy();
 
         return dto;
     }
@@ -93,6 +94,7 @@ public class PendingDiscService {
         pendingDisc.setImage(pendingDiscDto.getImage());
         pendingDisc.setAvailableInNL(pendingDiscDto.isAvailableInNL());
         pendingDisc.setMaterial(pendingDiscDto.getMaterial());
+        pendingDisc.setAddedBy(pendingDiscDto.getAddedBy());
 
         return pendingDisc;
     }

@@ -9,14 +9,11 @@ public class UserDto {
 
     public String username;
     public String emailAdress;
-    public String apikey;
 
     @JsonSerialize
     public Set<Authority> authorities;
 
     public String password;
-
-//    public List<Long> pendingDiscs;
 
     public String getUsername() {
         return username;
@@ -42,13 +39,6 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getApikey() {
-        return apikey;
-    }
-
-    public void setApikey(String apikey) {
-        this.apikey = apikey;
-    }
 
     public Set<Authority> getAuthorities() {
         return authorities;

@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class PendingDiscDto {
     public Long id;
     public String createdDate;
-    public User user;
+    public String addedBy;
     public String name;
     public String brand;
     public String model;
@@ -42,12 +42,12 @@ public class PendingDiscDto {
         this.createdDate = createdDate;
     }
 
-    public User getUser() {
-        return user;
+    public String getAddedBy() {
+        return addedBy;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAddedBy(String addedBy) {
+        this.addedBy = addedBy;
     }
 
     public String getName() {
