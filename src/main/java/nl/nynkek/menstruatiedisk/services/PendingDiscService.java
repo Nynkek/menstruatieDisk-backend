@@ -2,20 +2,26 @@ package nl.nynkek.menstruatiedisk.services;
 
 import nl.nynkek.menstruatiedisk.dtos.DiscDto;
 import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
+import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
+import nl.nynkek.menstruatiedisk.repositories.FileUploadRepository;
 import nl.nynkek.menstruatiedisk.repositories.PendingDiscRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PendingDiscService {
     private final PendingDiscRepository pendingDiscRepository;
+    private final FileUploadRepository uploadRepository;
+
 
     @Autowired
-    public PendingDiscService(PendingDiscRepository pendingDiscRepository) {
+    public PendingDiscService(PendingDiscRepository pendingDiscRepository, FileUploadRepository uploadRepository) {
         this.pendingDiscRepository = pendingDiscRepository;
+        this.uploadRepository = uploadRepository;
     }
 
     public List<PendingDisc> getPendingDiscs() {
@@ -97,6 +103,26 @@ public class PendingDiscService {
         pendingDisc.setAddedBy(pendingDiscDto.getAddedBy());
 
         return pendingDisc;
+    }
+
+    public void assignPhotoToPendingDisc(String name, Long id) {
+
+        Optional<PendingDisc> optionalPendingDisc = pendingDiscRepository.findById(id);
+
+        Optional<FileUploadResponse> fileUploadResponse = uploadRepository.findByFileName(name);
+
+        if (optionalPendingDisc.isPresent() && fileUploadResponse.isPresent()) {
+
+            FileUploadResponse photo = fileUploadResponse.get();
+
+            PendingDisc pendingDisc = optionalPendingDisc.get();
+
+            pendingDisc.setImage(photo);
+
+            pendingDiscRepository.save(pendingDisc);
+
+        }
+
     }
 
 }

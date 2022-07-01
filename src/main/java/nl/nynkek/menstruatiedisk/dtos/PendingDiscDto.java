@@ -1,7 +1,8 @@
 package nl.nynkek.menstruatiedisk.dtos;
 
+import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.Material;
-import nl.nynkek.menstruatiedisk.models.User;
+
 
 import javax.persistence.*;
 
@@ -22,7 +23,7 @@ public class PendingDiscDto {
     public String firmness;
     public String linkToStore;
     public String linkToReview;
-    public String image;
+    public FileUploadResponse image;
     public boolean isAvailableInNL = false;
     public Material material;
 
@@ -154,11 +155,11 @@ public class PendingDiscDto {
         this.linkToReview = linkToReview;
     }
 
-    public String getImage() {
+    public FileUploadResponse getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(FileUploadResponse image) {
         this.image = image;
     }
 
