@@ -22,12 +22,24 @@ abstract class SuperDisc {
     private String firmness;
     private String linkToStore;
     private String linkToReview;
-    private String image;
+
+    @OneToOne
+    FileUploadResponse image;
+
     @Column(name = "is_available_in_nl")
     private boolean isAvailableInNL = false;
 
     @Enumerated(EnumType.ORDINAL)
     private Material material;
+
+    public void setImage(FileUploadResponse image) {
+        this.image = image;
+    }
+
+    public FileUploadResponse getImage() {
+        return image;
+    }
+
 
     public Long getId() {
         return id;
@@ -139,14 +151,6 @@ abstract class SuperDisc {
 
     public void setLinkToReview(String linkToReview) {
         this.linkToReview = linkToReview;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public boolean isAvailableInNL() {
