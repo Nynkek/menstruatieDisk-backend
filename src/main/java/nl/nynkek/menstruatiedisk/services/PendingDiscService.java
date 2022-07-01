@@ -34,9 +34,9 @@ public class PendingDiscService {
         return pendingDisc;
     }
 
-    public Long createPendingDisc(PendingDiscDto pendingDiscDto) {
+    public PendingDisc createPendingDisc(PendingDiscDto pendingDiscDto) {
         PendingDisc newPendingDisc = pendingDiscRepository.save(toPendingDisc(pendingDiscDto));
-        return newPendingDisc.getId();
+        return newPendingDisc;
     }
 
     public void deletePendingDisc(Long id) {

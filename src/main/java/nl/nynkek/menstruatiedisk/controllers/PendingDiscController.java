@@ -1,13 +1,10 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
 import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
-import nl.nynkek.menstruatiedisk.dtos.UserDto;
-import nl.nynkek.menstruatiedisk.models.Brand;
 import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.services.PendingDiscService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,19 +38,19 @@ public class PendingDiscController {
     }
 
     @PostMapping(value = "/addDisc")
-    public ResponseEntity<Object> addDisc(@RequestBody PendingDiscDto dto) {
+    public PendingDisc addDisc(@RequestBody PendingDiscDto dto) {
 
-        Long newPendingDisc = pendingDiscService.createPendingDisc(dto);
+        PendingDisc newPendingDisc = pendingDiscService.createPendingDisc(dto);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newPendingDisc).toUri();
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(newPendingDisc).toUri();
 
-        return ResponseEntity.created(location).build();
+        return newPendingDisc;
     }
 
     @PostMapping("/{id}/photo")
     public void assignPhotoToPendingDisc(@PathVariable("id") Long id,
-                                     @RequestBody MultipartFile file) {
+                                     @RequestParam("image") MultipartFile file) {
 
         FileUploadResponse image = controller.singleFileUpload(file);
 

@@ -26,7 +26,7 @@ public class PhotoController {
 
     //    post for single upload
     @PostMapping("/upload")
-    FileUploadResponse singleFileUpload(@RequestParam("photo") MultipartFile file){
+    FileUploadResponse singleFileUpload(@RequestParam("image") MultipartFile file){
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
