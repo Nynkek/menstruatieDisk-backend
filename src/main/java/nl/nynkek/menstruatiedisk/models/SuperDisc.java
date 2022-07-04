@@ -51,6 +51,8 @@ abstract class SuperDisc {
 
     }
 
+
+
     public void setImage(FileUploadResponse image) {
         this.image = image;
     }
