@@ -9,14 +9,6 @@ public class PendingDisc extends SuperDisc {
     private String addedBy;
 
 
-    public PendingDisc(String name, String brand, String model, int width, int capacity, int rimWidth, boolean isReusable, boolean hasStem, String shape, String firmness, boolean isAvailableInNL, Material material) {
-        super(name, brand, model, width, capacity, rimWidth, isReusable, hasStem, shape, firmness, isAvailableInNL, material);
-    }
-
-    public PendingDisc() {
-        super();
-    }
-
     public String getCreatedDate() {
         return createdDate;
     }

@@ -2,7 +2,9 @@ package nl.nynkek.menstruatiedisk.models;
 
 import nl.nynkek.menstruatiedisk.MenstruatieDiskApplication;
 import nl.nynkek.menstruatiedisk.repositories.DiscRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.GreaterThan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,17 +17,31 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SpringBootTest
 @ContextConfiguration(classes = {MenstruatieDiskApplication.class})
 class DiscTest {
+    private Disc disc;
 
     @Autowired
-    DiscRepository discRepo;
+    DiscRepository discRepository;
 
-    Disc disc = new Disc();
+    @BeforeEach
+    void setup(){
+        disc = new Disc();
+    }
+
 
     @Test
-    void test_ConstructorDisc() {
-        disc.setBrand("Ziggy");
+    void test_GettersAndSetters() {
 
-        assertEquals("Ziggy", disc.getBrand());
+        disc.setName("naam");
+        assertEquals("naam", disc.getName());
+
+        disc.setRimWidth(12);
+        assertEquals(12, disc.getRimWidth());
+
+        disc.setReusable(true);
+        assertEquals(true, disc.isReusable());
+
+        disc.setMaterial(Material.SILICONE);
+        assertEquals(Material.SILICONE, disc.getMaterial());
     }
 
     @Test
@@ -35,30 +51,44 @@ class DiscTest {
         disc.setAvailableInNL(true);
         disc.setDesignFeature("Tof touwtje");
         disc.setName("Ziggy disc");
-        discRepo.save(disc);
-        assertNotNull(discRepo.findById(1L).get());
+        discRepository.save(disc);
+
+        java.util.Optional<Disc> maybeDisc = discRepository.findById(1L);
+
+        if (maybeDisc.isPresent()) {
+            System.out.println(maybeDisc.get());
+        }
+        Disc databaseDisc = discRepository.findById(1L).get();
+        assertNotNull(databaseDisc);
+        assertEquals("Tof touwtje", databaseDisc.getDesignFeature());
     }
 
-//    @Test
-//    public void test_ReadAll() {
-//        List<Disc> discList = discRepo.findAll();
-//        assertThat(discList).size().isGreaterThan(0);
-//    }
+    @Test
+    public void test_ReadAll() {
+        List<Disc> discList = discRepository.findAll();
+        assertThat("At least one disc in database", discList.size() > 0);
+    }
 
-//    @Test
-//    public void test_Read() {
+    @Test
+    public void test_Read() {
+        Disc discFromRepo = discRepository.findById(91L).get();
+        assertEquals("Flex", discFromRepo.getBrand());
+
 //        disc.setName("Ziggy disc");
+//        disc.setId(1L);
+//        discRepository.save(disc);
 //
-//        Disc disc = discRepo.findById(1L).get();
-//        assertEquals("Ziggy disc", disc.getName());
-//    }
-//
-//    @Test
-//    public void test_Update() {
-//        Disc disc1 = discRepo.findById(1L).get();
-//        disc1.setBrand("Merknaam");
-//        discRepo.save(disc1);
-//        assertNotEquals("Ziggy", discRepo.findById(1L).get());
-//    }
+//        Disc databseDisc = discRepository.findById(1L).get();
+//        assertEquals("Ziggy disc", databseDisc.getName());
+    }
+
+    @Test
+    public void test_Update() {
+        Disc discFromRepo = discRepository.findById(92L).get();
+        discFromRepo.setBrand("Merknaam");
+        discRepository.save(discFromRepo);
+        assertEquals("Merknaam", discRepository.findById(92L).get().getBrand());
+
+    }
 
 }

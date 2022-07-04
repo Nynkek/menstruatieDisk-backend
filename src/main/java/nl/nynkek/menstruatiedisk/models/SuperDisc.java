@@ -32,24 +32,7 @@ abstract class SuperDisc {
     @Enumerated(EnumType.ORDINAL)
     private Material material;
 
-    public SuperDisc(String name, String brand, String model, int width, int capacity, int rimWidth, boolean isReusable, boolean hasStem, String shape, String firmness, boolean isAvailableInNL, Material material) {
-        this.name = name;
-        this.brand = brand;
-        this.model = model;
-        this.width = width;
-        this.capacity = capacity;
-        this.rimWidth = rimWidth;
-        this.isReusable = isReusable;
-        this.hasStem = hasStem;
-        this.shape = shape;
-        this.firmness = firmness;
-        this.isAvailableInNL = isAvailableInNL;
-        this.material = material;
-    }
 
-    public SuperDisc() {
-
-    }
 
 
 

@@ -46,10 +46,13 @@ public class DiscController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DiscDto> getDiscById(@PathVariable("id") Long id) {
-        DiscDto disc = discService.getDisc(id);
-        return ResponseEntity.ok().body(disc);
+        try {
+            DiscDto disc = discService.getDisc(id);
+            return ResponseEntity.ok().body(disc);
+        } catch (Exception exception) {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 
     @PostMapping(value = "/addDisc")
     public ResponseEntity<Object> addDisc(@RequestBody DiscDto dto) {
@@ -61,12 +64,12 @@ public class DiscController {
 
     @PostMapping("/{id}/photo")
     public void assignPhotoToDisc(@PathVariable("id") Long id,
-                                         @RequestBody MultipartFile file) {
+                                  @RequestBody MultipartFile file) {
 
         FileUploadResponse image = controller.singleFileUpload(file);
 
         discService.assignPhotoToDisc(image.getFileName(), id);
 
     }
-    
+
 }

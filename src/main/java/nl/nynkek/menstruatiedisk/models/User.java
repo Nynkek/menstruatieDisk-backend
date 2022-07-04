@@ -27,7 +27,6 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
-
     public String getUsername() {
         return username;
     }

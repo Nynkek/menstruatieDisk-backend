@@ -19,14 +19,14 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(classes = {MenstruatieDiskApplication.class})
 class BrandRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
+//    @Autowired
+//    private TestEntityManager entityManager;
 
     @Autowired
     private BrandRepository brandRepository;
 
-    @Test
-    void testGetBrands() {
+//    @Test
+//    void testGetBrands() {
 //        Disc disc = new Disc();
 //        disc.setBrand("Ziggy");
 //        entityManager.persist(disc);
@@ -38,6 +38,6 @@ class BrandRepositoryTest {
 //        String actual = found.getBrand();
 //        assertEquals(expected, actual);
 
-    }
+//    }
 
 }
