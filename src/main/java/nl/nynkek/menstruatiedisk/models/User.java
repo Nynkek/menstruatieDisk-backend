@@ -60,6 +60,10 @@ public class User {
         this.authorities.add(authority);
     }
 
+//    public void setAuthorities(Set<Authority> authorities) {
+//        this.authorities = authorities;
+//    }
+
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }
