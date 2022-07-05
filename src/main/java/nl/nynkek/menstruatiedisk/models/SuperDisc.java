@@ -32,6 +32,10 @@ abstract class SuperDisc {
     @Enumerated(EnumType.ORDINAL)
     private Material material;
 
+
+
+
+
     public void setImage(FileUploadResponse image) {
         this.image = image;
     }
@@ -39,7 +43,6 @@ abstract class SuperDisc {
     public FileUploadResponse getImage() {
         return image;
     }
-
 
     public Long getId() {
         return id;

@@ -1,7 +1,9 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
 import nl.nynkek.menstruatiedisk.dtos.UserDto;
+import nl.nynkek.menstruatiedisk.exeptions.UsernameNotFoundException;
 import nl.nynkek.menstruatiedisk.services.UserService;
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +24,19 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<List<UserDto>> getUsers() {
+        List<UserDto> userDtos = userService.getUsers();
+        return ResponseEntity.ok().body(userDtos);
     }
 
     @GetMapping("/{username}")
-    public UserDto getUserByUsername(@PathVariable String username) {
-        return userService.getUser(username);
+    public ResponseEntity<UserDto> getUserByUsername(@PathVariable String username) {
+        try {
+            UserDto userDto = userService.getUser(username);
+            return ResponseEntity.ok().body(userDto);
+        } catch (UsernameNotFoundException exception) {
+           return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/createUser")

@@ -27,7 +27,6 @@ public class User {
     private Set<Authority> authorities = new HashSet<>();
 
 
-
     public String getUsername() {
         return username;
     }
@@ -59,6 +58,10 @@ public class User {
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
+
+//    public void setAuthorities(Set<Authority> authorities) {
+//        this.authorities = authorities;
+//    }
 
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);

@@ -18,7 +18,7 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Brand> getBrands() {
         return brandService.getBrands();
     }

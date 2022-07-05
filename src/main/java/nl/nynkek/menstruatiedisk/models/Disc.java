@@ -5,4 +5,5 @@ import javax.persistence.*;
 @Entity
 @Table(name = "discs")
 public class Disc extends SuperDisc{
+
 }
