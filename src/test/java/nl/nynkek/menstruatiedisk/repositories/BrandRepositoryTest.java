@@ -2,7 +2,7 @@ package nl.nynkek.menstruatiedisk.repositories;
 
 
 import nl.nynkek.menstruatiedisk.MenstruatieDiskApplication;
-import nl.nynkek.menstruatiedisk.models.Brand;
+
 import nl.nynkek.menstruatiedisk.models.Disc;
 import org.junit.jupiter.api.Test;
 
@@ -22,8 +22,8 @@ class BrandRepositoryTest {
 //    @Autowired
 //    private TestEntityManager entityManager;
 
-    @Autowired
-    private BrandRepository brandRepository;
+//    @Autowired
+//    private BrandRepository brandRepository;
 
 //    @Test
 //    void testGetBrands() {
