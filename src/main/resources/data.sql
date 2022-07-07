@@ -58,19 +58,13 @@ VALUES (98, 'Bamboozy', 65, 'Nederlands merk', true, false, 'L', 'Bamboozy disk'
 
 
 INSERT INTO users (username, email_adress, password)
-VALUES ('nynke', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
+VALUES ('nynke', 'info@nynke.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 INSERT INTO users (username, email_adress, password)
-VALUES ('user', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
+VALUES ('user', 'info@user.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 INSERT INTO users (username, email_adress, password)
-VALUES ('admin', 'info@email.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
-
-
-INSERT INTO brands (id, name, website, description)
-VALUES (1, 'Bamboozy', 'https://website.com', 'Bamboozy heeft twee disks: een M (65mm) en een grotere L (70mm).');
-INSERT INTO brands (id, name, website, description)
-VALUES (2, 'Ziggy', 'https://website.com', 'Ziggy heeft veel discs');
-INSERT INTO brands (id, name, website, description)
-VALUES (3, 'Lumma', 'https://website.com', 'Lumma is een merk cup');
+VALUES ('admin', 'info@admin.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
+INSERT INTO users (username, email_adress, password)
+VALUES ('brand', 'info@brand.nl', '$2a$12$/DQeORgROLU36hixj4tMJO1MSx3uxwscCHtGhoL6ZQ9DMf/Pj/TYm');
 
 
 INSERT INTO pending_discs
@@ -90,3 +84,7 @@ INSERT INTO authorities (username, authority)
 VALUES ('nynke', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('nynke', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority)
+VALUES ('nynke', 'ROLE_BRAND');
+INSERT INTO authorities (username, authority)
+VALUES ('brand', 'ROLE_BRAND');

@@ -45,7 +45,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //JWT token authentication
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -53,9 +52,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-                /*voeg de antmatchers toe voor admin(post en delete) en user (overige)*/
+
+                .antMatchers(HttpMethod.GET, "/pendingdiscs").hasAnyRole("BRAND", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/pendingdiscs").hasAnyRole("BRAND", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/pendingdiscs/**").hasRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/discs").permitAll()
+                .antMatchers(HttpMethod.POST,"/discs/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/discs/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/discs/**").hasRole("ADMIN")
+
+
                 .antMatchers("/authenticated").authenticated()
-                .antMatchers("/authenticate").permitAll()/*allen dit punt mag toegankelijk zijn voor niet ingelogde gebruikers*/
+                .antMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()
