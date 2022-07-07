@@ -48,16 +48,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/users/createUser/").permitAll()
+                .antMatchers(HttpMethod.GET,"/users/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/pendingdiscs").hasAnyRole("BRAND", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/pendingdiscs").hasAnyRole("BRAND", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/pendingdiscs/").hasAnyRole("BRAND", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/pendingdiscs/").hasAnyRole("BRAND", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/pendingdiscs/**").hasRole("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/discs").permitAll()
+                .antMatchers(HttpMethod.GET, "/discs/").permitAll()
                 .antMatchers(HttpMethod.POST,"/discs/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/discs/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE,"/discs/**").hasRole("ADMIN")

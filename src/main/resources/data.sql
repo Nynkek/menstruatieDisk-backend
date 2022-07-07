@@ -81,6 +81,8 @@ VALUES ('admin', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('admin', 'ROLE_ADMIN');
 INSERT INTO authorities (username, authority)
+VALUES ('admin', 'ROLE_BRAND');
+INSERT INTO authorities (username, authority)
 VALUES ('nynke', 'ROLE_USER');
 INSERT INTO authorities (username, authority)
 VALUES ('nynke', 'ROLE_ADMIN');
