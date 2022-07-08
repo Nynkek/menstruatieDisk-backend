@@ -38,12 +38,6 @@ public class DiscController {
     }
 
 
-//    @GetMapping("/")
-//    public List<Disc> frontpage() {
-//        List<Disc> discs = discService.getDiscs();
-//        return discs;
-//    }
-
     @GetMapping("/{id}")
     public ResponseEntity<DiscDto> getDiscById(@PathVariable("id") Long id) {
         try {
@@ -57,9 +51,6 @@ public class DiscController {
     @PostMapping(value = "/addDisc")
     public Disc addDisc(@RequestBody DiscDto dto) {
         Disc newDisc = discService.createDisc(dto);
-
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                .buildAndExpand(newDisc).toUri();
         return newDisc;
     }
 

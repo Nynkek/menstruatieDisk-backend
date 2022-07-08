@@ -5,6 +5,7 @@ import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.services.PendingDiscService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -56,6 +57,12 @@ public class PendingDiscController {
 
         pendingDiscService.assignPhotoToPendingDisc(image.getFileName(), id);
 
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Object> deletePendingDisc(@PathVariable("id") Long id) {
+        pendingDiscService.deletePendingDisc(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
