@@ -39,9 +39,9 @@ public class DiscService {
 //        return disc;
 //    }
 
-    public Long createDisc(DiscDto discDto) {
+    public Disc createDisc(DiscDto discDto) {
         Disc newDisc = discRepository.save(toDisc(discDto));
-        return newDisc.getId();
+        return newDisc;
     }
 
     public static DiscDto transferToDto(Disc disc) {

@@ -55,16 +55,17 @@ public class DiscController {
     }
 
     @PostMapping(value = "/addDisc")
-    public ResponseEntity<Object> addDisc(@RequestBody DiscDto dto) {
-        Long newDisc = discService.createDisc(dto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(newDisc).toUri();
-        return ResponseEntity.created(location).build();
+    public Disc addDisc(@RequestBody DiscDto dto) {
+        Disc newDisc = discService.createDisc(dto);
+
+//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//                .buildAndExpand(newDisc).toUri();
+        return newDisc;
     }
 
     @PostMapping("/{id}/photo")
     public void assignPhotoToDisc(@PathVariable("id") Long id,
-                                  @RequestBody MultipartFile file) {
+                                  @RequestParam("image") MultipartFile file) {
 
         FileUploadResponse image = controller.singleFileUpload(file);
 
