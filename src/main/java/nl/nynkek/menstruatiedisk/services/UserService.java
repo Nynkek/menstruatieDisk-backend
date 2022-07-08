@@ -3,11 +3,12 @@ package nl.nynkek.menstruatiedisk.services;
 import nl.nynkek.menstruatiedisk.dtos.UserDto;
 import nl.nynkek.menstruatiedisk.exeptions.UsernameNotFoundException;
 import nl.nynkek.menstruatiedisk.models.Authority;
-import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.models.User;
 import nl.nynkek.menstruatiedisk.repositories.UserRepository;
 import nl.nynkek.menstruatiedisk.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,8 +22,11 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
+    private final BCryptPasswordEncoder passwordEncoder;
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public List<UserDto> getUsers() {
@@ -52,6 +56,9 @@ public class UserService {
 
     public String createUser(UserDto userDto) {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
+        userDto.setAuthorities(null);
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(encodedPassword);
         User newUser = userRepository.save(toUser(userDto));
         return newUser.getUsername();
     }
@@ -122,7 +129,14 @@ public class UserService {
         user.setPassword(userDto.getPassword());
         user.setEmailAdress(userDto.getEmailAdress());
 
-//        user.addRole("ROLE_USER");
+        if (userDto.getAuthorities() == null || userDto.getAuthorities().size() == 0) {
+            Authority authority = new Authority(user.getUsername(), "ROLE_USER");
+            user.addAuthority(authority);
+        } else {
+            for (Authority authority : userDto.getAuthorities()) {
+                user.addAuthority(authority);
+            }
+        }
 
         return user;
     }

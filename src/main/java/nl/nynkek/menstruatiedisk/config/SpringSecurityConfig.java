@@ -49,6 +49,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users/createUser/").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/createUser").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/createUser/**").permitAll()
+
                 .antMatchers(HttpMethod.GET,"/users/").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
@@ -64,7 +67,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
                 .antMatchers("/authenticated").authenticated()
+                .antMatchers("/authenticate/").permitAll()
                 .antMatchers("/authenticate").permitAll()
+
                 .anyRequest().permitAll()
                 .and()
                 .sessionManagement()
