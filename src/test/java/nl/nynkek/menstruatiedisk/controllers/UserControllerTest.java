@@ -1,8 +1,7 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
-import nl.nynkek.menstruatiedisk.models.Disc;
 import nl.nynkek.menstruatiedisk.models.User;
-import nl.nynkek.menstruatiedisk.services.DiscService;
+import nl.nynkek.menstruatiedisk.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest
-class DiscControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,31 +29,30 @@ class DiscControllerTest {
     private WebApplicationContext context;
 
     @MockBean
-    DiscService discService;
-    Disc disc;
+    UserService userService;
+    User user;
 
     @BeforeEach
     public void setup() {
-        disc = new Disc();
         User user = new User();
         user.setUsername("tester");
-        disc.setName("testdisc");
-        disc.setId(1L);
+
     }
 
     @Test
-    public void getDiscsReturnsStatusOk() throws Exception {
-        mockMvc.perform(get("/discs/"))
+    public void getUsersReturnsStatusOk() throws Exception {
+        mockMvc.perform(get("/users/"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void retrieveDisc() throws Exception {
+    void retrieveUser() throws Exception {
         this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/discs/91"))
+                .perform(MockMvcRequestBuilders.get("/users/tester"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
 
 
 }

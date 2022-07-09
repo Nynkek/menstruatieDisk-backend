@@ -15,46 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.web.context.WebApplicationContext;
 
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc(addFilters = false)
 @SpringBootTest
-class DiscControllerTest {
+class AuthenticationControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private WebApplicationContext context;
-
-    @MockBean
-    DiscService discService;
-    Disc disc;
-
-    @BeforeEach
-    public void setup() {
-        disc = new Disc();
-        User user = new User();
-        user.setUsername("tester");
-        disc.setName("testdisc");
-        disc.setId(1L);
-    }
-
-    @Test
-    public void getDiscsReturnsStatusOk() throws Exception {
-        mockMvc.perform(get("/discs/"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void retrieveDisc() throws Exception {
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/discs/91"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
 
 
 }
