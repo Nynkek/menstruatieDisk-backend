@@ -1,12 +1,13 @@
 INSERT INTO images (file_name, content_type, url) 
-VALUES ('goodlife', 'jpg', 'https://cupkiezer.nl/wp-content/uploads/2018/06/goodlife-s-cup.jpg');
+VALUES ('goodlife', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2018/06/goodlife-s-cup.jpg');
 INSERT INTO images (file_name, content_type, url)
-VALUES ('claricup', 'jpg', 'https://cupkiezer.nl/wp-content/uploads/2019/07/Claricup-2_box_cup_sterilizer.jpg');
+VALUES ('claricup', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2019/07/Claricup-2_box_cup_sterilizer.jpg');
 INSERT INTO images (file_name, content_type, url)
-VALUES ('belladot', 'jpg', 'https://cupkiezer.nl/wp-content/uploads/2018/10/Belladot_evelina_small_m_box_pouch.jpg');
+VALUES ('belladot', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2018/10/Belladot_evelina_small_m_box_pouch.jpg');
 INSERT INTO images (file_name, content_type, url)
-VALUES ('genialday', 'jpg', 'https://cupkiezer.nl/wp-content/uploads/2017/09/genial-day-l.jpg');
-
+VALUES ('genialday', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2017/09/genial-day-l.jpg');
+INSERT INTO images (file_name, content_type, url)
+VALUES ('menstruatiedisk logo zwart.png', 'image/png', 'http://localhost:8080/download/menstruatiedisk%20logo%20zwart.png');
 
 
 INSERT INTO discs
