@@ -37,22 +37,14 @@ class PhotoControllerTest {
     PhotoService photoService;
     FileUploadResponse file;
 
-    @BeforeEach
-    public void setup() {
-        FileUploadResponse file = new FileUploadResponse();
-        file.setFileName("tester.jpg");
-        file.setUrl("http://localhost:8080/download/tester.jpg");
-        file.setContentType("image/png");
-    }
 
-
-    @Test
-    void retrieveFile() throws Exception {
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get("/download/tester.jpg"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
+//    @Test
+//    void retrieveFile() throws Exception {
+//        this.mockMvc
+//                .perform(MockMvcRequestBuilders.get("/download/menstruatiedisklogozwart.png"))
+//                .andDo(MockMvcResultHandlers.print())
+//                .andExpect(MockMvcResultMatchers.status().isOk());
+//    }
 
 
 }

@@ -7,7 +7,7 @@ VALUES ('belladot', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2018/1
 INSERT INTO images (file_name, content_type, url)
 VALUES ('genialday', 'image/png', 'https://cupkiezer.nl/wp-content/uploads/2017/09/genial-day-l.jpg');
 INSERT INTO images (file_name, content_type, url)
-VALUES ('menstruatiedisk logo zwart.png', 'image/png', 'http://localhost:8080/download/menstruatiedisk%20logo%20zwart.png');
+VALUES ('menstruatiedisklogozwart.png"', 'image/png', 'http://localhost:8080/download/menstruatiedisklogozwart.png');
 
 
 INSERT INTO discs
