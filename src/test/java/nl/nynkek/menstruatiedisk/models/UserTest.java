@@ -38,8 +38,6 @@ class UserTest {
     @Test
     void registerUser() {
 
-
-
         UserDto userDto = new UserDto();
         userDto.setUsername("Testert");
         userDto.setEmailAdress("test@testen.nl");
