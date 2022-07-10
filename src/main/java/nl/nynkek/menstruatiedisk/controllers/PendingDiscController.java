@@ -18,7 +18,6 @@ public class PendingDiscController {
     private final PendingDiscService pendingDiscService;
     private final PhotoController controller;
 
-
     @Autowired
     public PendingDiscController(PendingDiscService pendingDiscService, PhotoController controller) {
         this.pendingDiscService = pendingDiscService;
@@ -38,21 +37,14 @@ public class PendingDiscController {
 
     @PostMapping(value = "/addDisc")
     public PendingDisc addPendingDisc(@RequestBody PendingDiscDto dto) {
-
         PendingDisc newPendingDisc = pendingDiscService.createPendingDisc(dto);
-
-//        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//                .buildAndExpand(newPendingDisc).toUri();
-
         return newPendingDisc;
     }
 
     @PostMapping("/{id}/photo")
     public void assignPhotoToPendingDisc(@PathVariable("id") Long id,
                                      @RequestParam("image") MultipartFile file) {
-
         FileUploadResponse image = controller.singleFileUpload(file);
-
         pendingDiscService.assignPhotoToPendingDisc(image.getFileName(), id);
 
     }
@@ -62,5 +54,4 @@ public class PendingDiscController {
         pendingDiscService.deletePendingDisc(id);
         return ResponseEntity.noContent().build();
     }
-
 }

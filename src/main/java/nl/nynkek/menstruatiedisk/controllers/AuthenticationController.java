@@ -19,7 +19,6 @@ import java.security.Principal;
 @RestController
 public class AuthenticationController {
 
-    /*autowire authentionManager, userDetailService en jwtUtil*/
     @Autowired
     private AuthenticationManager authenticationManager;
 

@@ -44,14 +44,13 @@ public class PhotoService {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         Path filePath = Paths.get(fileStoragePath + "/" + fileName);
-        // for windows: two backslashes: "\\" + fileName
+        // for windows: two backslashes: "\\" + fileName. For mac "/".
 
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException("Issue in storing the file", e);
         }
-
         repo.save(new FileUploadResponse(fileName, file.getContentType(), url));
 
         return fileName;
@@ -60,7 +59,6 @@ public class PhotoService {
     public Resource downLoadFile(String fileName) {
 
         Path path = Paths.get(fileStorageLocation).toAbsolutePath().resolve(fileName);
-
         Resource resource;
 
         try {
