@@ -56,7 +56,6 @@ class DiscTest {
         java.util.Optional<Disc> maybeDisc = discRepository.findById(1L);
 
         if (maybeDisc.isPresent()) {
-            System.out.println(maybeDisc.get());
         }
         Disc databaseDisc = discRepository.findById(1L).get();
         assertNotNull(databaseDisc);
@@ -74,12 +73,6 @@ class DiscTest {
         Disc discFromRepo = discRepository.findById(91L).get();
         assertEquals("Flex", discFromRepo.getBrand());
 
-//        disc.setName("Ziggy disc");
-//        disc.setId(1L);
-//        discRepository.save(disc);
-//
-//        Disc databseDisc = discRepository.findById(1L).get();
-//        assertEquals("Ziggy disc", databseDisc.getName());
     }
 
     @Test
