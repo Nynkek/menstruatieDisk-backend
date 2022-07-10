@@ -3,9 +3,6 @@ package nl.nynkek.menstruatiedisk.dtos;
 import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.Material;
 
-
-import javax.persistence.*;
-
 public class PendingDiscDto {
     public Long id;
     public String createdDate;

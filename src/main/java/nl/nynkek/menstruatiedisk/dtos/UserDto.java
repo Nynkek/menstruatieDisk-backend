@@ -39,7 +39,6 @@ public class UserDto {
         this.password = password;
     }
 
-
     public Set<Authority> getAuthorities() {
         return authorities;
     }

@@ -1,7 +1,6 @@
 package nl.nynkek.menstruatiedisk.controllers;
 
 import nl.nynkek.menstruatiedisk.dtos.DiscDto;
-import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
 import nl.nynkek.menstruatiedisk.models.Disc;
 import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.services.DiscService;
@@ -9,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -37,7 +34,6 @@ public class DiscController {
         return ResponseEntity.ok().body(dtos);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<DiscDto> getDiscById(@PathVariable("id") Long id) {
         try {
@@ -57,11 +53,8 @@ public class DiscController {
     @PostMapping("/{id}/photo")
     public void assignPhotoToDisc(@PathVariable("id") Long id,
                                   @RequestParam("image") MultipartFile file) {
-
         FileUploadResponse image = controller.singleFileUpload(file);
-
         discService.assignPhotoToDisc(image.getFileName(), id);
-
     }
 
 }

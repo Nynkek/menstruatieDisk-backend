@@ -4,7 +4,6 @@ import nl.nynkek.menstruatiedisk.dtos.DiscDto;
 import nl.nynkek.menstruatiedisk.exeptions.RecordNotFoundException;
 import nl.nynkek.menstruatiedisk.models.Disc;
 import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
-import nl.nynkek.menstruatiedisk.models.PendingDisc;
 import nl.nynkek.menstruatiedisk.repositories.DiscRepository;
 import nl.nynkek.menstruatiedisk.repositories.FileUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +29,6 @@ public class DiscService {
         return discs;
     }
 
-//    public Disc getDisc(Long id) {
-//        Disc disc = discRepository.findById(id).get();
-//        if (disc == null)
-//            throw new
-//
-//        System.out.println("HALLO" + disc);
-//        return disc;
-//    }
 
     public Disc createDisc(DiscDto discDto) {
         Disc newDisc = discRepository.save(toDisc(discDto));
@@ -64,7 +55,6 @@ public class DiscService {
         dto.image = disc.getImage();
         dto.isAvailableInNL = disc.isAvailableInNL();
         dto.material = disc.getMaterial();
-
         return dto;
     }
 
@@ -89,10 +79,8 @@ public class DiscService {
         disc.setImage(discDto.getImage());
         disc.setAvailableInNL(discDto.isAvailableInNL());
         disc.setMaterial(discDto.getMaterial());
-
         return disc;
     }
-
 
     public DiscDto getDisc(Long id) {
         Optional<Disc> disc = discRepository.findById(id);
@@ -104,21 +92,15 @@ public class DiscService {
         }
     }
 
-
     public void assignPhotoToDisc(String name, Long id) {
 
         Optional<Disc> optionalDisc = discRepository.findById(id);
-
         Optional<FileUploadResponse> fileUploadResponse = uploadRepository.findByFileName(name);
 
         if (optionalDisc.isPresent() && fileUploadResponse.isPresent()) {
-
             FileUploadResponse photo = fileUploadResponse.get();
-
             Disc disc = optionalDisc.get();
-
             disc.setImage(photo);
-
             discRepository.save(disc);
 
         }

@@ -1,6 +1,5 @@
 package nl.nynkek.menstruatiedisk.services;
 
-import nl.nynkek.menstruatiedisk.dtos.DiscDto;
 import nl.nynkek.menstruatiedisk.dtos.PendingDiscDto;
 import nl.nynkek.menstruatiedisk.models.FileUploadResponse;
 import nl.nynkek.menstruatiedisk.models.PendingDisc;
@@ -42,15 +41,6 @@ public class PendingDiscService {
     public void deletePendingDisc(Long id) {
         pendingDiscRepository.deleteById(id);
     }
-
-//    public void updatePendingDisc(Long id, PendingDiscDto newPendingDisc) {
-//        if (!pendingDiscRepository.existsById(id)) throw new IdNotFoundException(id);
-//        PendingDisc pendingDisc = pendingDiscRepository.findById(id).get();
-//        pendingDisc.setPassword(newPendingDisc.getPassword());
-//        pendingDisc.setEmailAdress(newPendingDisc.getEmailAdress());
-//        pendingDiscRepository.save(pendingDisc);
-//    }
-//    voor nu hoeft dit niet te kunnen updaten
 
 
     public static PendingDiscDto fromPendingDisc(PendingDisc pendingDisc){
@@ -106,23 +96,14 @@ public class PendingDiscService {
     }
 
     public void assignPhotoToPendingDisc(String name, Long id) {
-
         Optional<PendingDisc> optionalPendingDisc = pendingDiscRepository.findById(id);
-
         Optional<FileUploadResponse> fileUploadResponse = uploadRepository.findByFileName(name);
-
         if (optionalPendingDisc.isPresent() && fileUploadResponse.isPresent()) {
-
             FileUploadResponse photo = fileUploadResponse.get();
-
             PendingDisc pendingDisc = optionalPendingDisc.get();
-
             pendingDisc.setImage(photo);
-
             pendingDiscRepository.save(pendingDisc);
-
         }
-
     }
 
 }

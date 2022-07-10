@@ -8,7 +8,6 @@ import nl.nynkek.menstruatiedisk.repositories.UserRepository;
 import nl.nynkek.menstruatiedisk.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,7 +47,6 @@ public class UserService {
         }
         return dto;
     }
-
 
     public boolean userExists(String username) {
         return userRepository.existsById(username);
@@ -98,11 +96,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-
-    // keuze: username is de unique sleutel/id. dus die mag je niet aanpassen. Expres!
-
-    // als er nog een pending disc aan gebruiker gekoppeld is mag je de user niet verwijderen.
-
     public static UserDto fromUser(User user) {
 
         var dto = new UserDto();
@@ -111,12 +104,6 @@ public class UserService {
         dto.password = user.getPassword();
         dto.emailAdress = user.getEmailAdress();
         dto.authorities = user.getAuthorities();
-
-
-
-//        dto.pendingDiscs = user.getPendingDiscs().stream().map(pendingDisc -> {
-//            return pendingDisc.getId();
-//        }).toList();
 
         return dto;
     }
