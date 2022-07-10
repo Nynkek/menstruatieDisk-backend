@@ -12,8 +12,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.web.context.WebApplicationContext;
-
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,18 +23,13 @@ class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext context;
-
     @MockBean
     UserService userService;
-    User user;
 
     @BeforeEach
     public void setup() {
         User user = new User();
         user.setUsername("tester");
-
     }
 
     @Test
@@ -52,7 +45,5 @@ class UserControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
-
-
 
 }

@@ -44,7 +44,7 @@ public class PhotoService {
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
         Path filePath = Paths.get(fileStoragePath + "/" + fileName);
-        // for windows: two backslashes: "\\" + fileName. For mac "/".
+        // change for windows to two backslashes: "\\" + fileName. For mac it's "/".
 
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
